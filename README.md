@@ -50,9 +50,5 @@ README.md      # Project documentation
 - [Font Awesome](https://fontawesome.com/) for icons
 - [EmailJS](https://www.emailjs.com/) for contact form integration
 
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
 ---
 **Made with ❤️ by Narinder Kumar
