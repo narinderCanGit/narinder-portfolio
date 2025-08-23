@@ -489,7 +489,11 @@ main { overflow-x: hidden; }
 
 .hero .btn-primary { margin-inline: auto; }
 
-
+.hero-cta-btn {
+   border-style: solid;
+  border-width: 2px;
+  box-shadow: 0 4px 15px hsla(210, 80%, 60%, 0.3);
+}
 
 
 
@@ -1384,16 +1388,26 @@ margin-bottom: 50px;
 
 .timeline-container {
     padding: 8px;
+    padding-left: 60px;
+    position: relative;
 }
 
 .timeline-logo {
     position: absolute;
-    width: 50px;
+    width: 40px;
+    height: 40px;
     overflow: hidden;
+    top: 10px;
+    left: 10px;
+    border-radius: 4px;
+    background: var(--bg-secondary);
+    padding: 4px;
 }
 
 .timeline-logo > img {
     width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 #timeline-divider {
@@ -1427,8 +1441,11 @@ margin-bottom: 50px;
 }
 
 .experience-company-name {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: #eb822d;
+    line-height: 1.3;
+    margin-bottom: 5px;
+    word-wrap: break-word;
 }
 
 .experience-duration {
@@ -1468,6 +1485,22 @@ margin-bottom: 50px;
 
     #timeline-divider {
         left: 2%;
+    }
+    
+    .timeline-container {
+        padding-left: 50px;
+    }
+    
+    .timeline-logo {
+        width: 35px;
+        height: 35px;
+        top: 8px;
+        left: 8px;
+    }
+    
+    .experience-company-name {
+        font-size: 1rem;
+        line-height: 1.2;
     }
 }
 
