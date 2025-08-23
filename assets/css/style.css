@@ -2,14 +2,6 @@
  * style.css
 \*-----------------------------------*/
 
-/**
- * copyright 2022 codewithsadee
- */
-
-
-
-
-
 /*-----------------------------------*\
  * #CUSTOM PROPERTY
 \*-----------------------------------*/
@@ -1131,6 +1123,57 @@ textarea.input-field {
     font-size: 16px;
   }
 
+  /**
+   * PROJECT OVERLAY - Mobile
+   */
+
+  .project-details {
+    padding: 12px;
+    max-height: 100%;
+    overflow-y: auto;
+  }
+
+  .project-title {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+
+  .project-description {
+    font-size: 0.7rem;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    max-height: 120px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  }
+
+  .project-description::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  .project-description::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .project-description::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+  }
+
+  .project-links {
+    gap: 6px;
+  }
+
+  .project-link {
+    padding: 6px 8px;
+    font-size: 0.65rem;
+  }
+
+  .project-link ion-icon {
+    font-size: 10px;
+  }
+
 }
 
 
@@ -1168,9 +1211,9 @@ textarea.input-field {
     font-size: 2.2rem;
   }
   
-  .hero-title:last-of-type {
+  /* .hero-title:last-of-type {
     font-size: 1.6rem;
-  }
+  } */
   
   .hero-social-list {
     gap: 18px;
@@ -1223,34 +1266,54 @@ textarea.input-field {
   }
 
   /**
-   * PROJECT OVERLAY - Mobile
+   * PROJECT OVERLAY - Tablet
    */
 
   .project-details {
     padding: 15px;
+    max-height: 100%;
+    overflow-y: auto;
   }
 
   .project-title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     margin-bottom: 8px;
   }
 
   .project-description {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    line-height: 1.4;
     margin-bottom: 15px;
+    max-height: 150px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  }
+
+  .project-description::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .project-description::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .project-description::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
   }
 
   .project-links {
-    gap: 10px;
+    gap: 8px;
   }
 
   .project-link {
-    padding: 8px 12px;
-    font-size: 0.75rem;
+    padding: 6px 10px;
+    font-size: 0.7rem;
   }
 
   .project-link ion-icon {
-    font-size: 14px;
+    font-size: 12px;
   }
 
 }
