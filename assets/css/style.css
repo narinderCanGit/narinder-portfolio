@@ -478,7 +478,37 @@ main { overflow-x: hidden; }
   margin-bottom: 30px;
 }
 
-:is(.hero-social-list, .scroll-down) { display: none; }
+:is(.scroll-down) { display: none; }
+
+.hero-social-list {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.hero-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--bg-secondary);
+  color: var(--color-primary);
+  border-radius: 50%;
+  transition: var(--transition-1);
+  position: relative;
+}
+
+.hero-social-link:is(:hover, :focus) {
+  background: var(--raw-seinna);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.hero-social-link ion-icon {
+  font-size: 18px;
+}
 
 .hero-content { max-width: 450px; }
 
@@ -561,11 +591,11 @@ main { overflow-x: hidden; }
 
 .about { padding-block: var(--section-padding); }
 
-.about-banner {
+/* .about-banner {
   max-width: 400px;
   margin-inline: auto;
   margin-bottom: 80px;
-}
+} */
 
 .about .btn {
   max-width: unset;
@@ -727,6 +757,95 @@ main { overflow-x: hidden; }
 }
 
 .project-card:is(:hover, :focus) .publish-date { transition-delay: 0.1s; }
+
+/* Project Overlay Styles */
+.project-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  border-radius: inherit;
+  z-index: 2;
+}
+
+.project-card:hover .project-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+.project-details {
+  text-align: center;
+  padding: 20px;
+  color: white;
+  max-width: 90%;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--sizzling-sunrise);
+}
+
+.project-description {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.project-links {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.project-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 25px;
+  color: white;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.project-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.project-link ion-icon {
+  font-size: 16px;
+}
+
+.github-link:hover {
+  background: rgba(51, 51, 51, 0.9);
+  border-color: #333;
+}
+
+.demo-link:hover {
+  background: rgba(255, 193, 7, 0.9);
+  border-color: var(--sizzling-sunrise);
+  color: #000;
+}
 
 .load-more {
   font-size: var(--fs-4);
@@ -959,6 +1078,62 @@ textarea.input-field {
 }
 
 
+/**
+ * responsive for mobile and small tablets
+ */
+
+@media (max-width: 767px) {
+  
+  /**
+   * HERO - Mobile specific improvements
+   */
+  
+  .hero {
+    padding-top: 80px;
+    min-height: fit-content;
+    margin-top: 10%;
+  }
+  
+  .hero-banner {
+    max-width: 280px;
+    margin-bottom: 20px;
+  }
+  
+  .hero-content {
+    margin-bottom: 20px;
+  }
+  
+  .hero-title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .hero-title:last-of-type {
+    font-size: 1.2rem;
+  }
+  
+  .hero-cta-btn {
+    padding: 10px 25px;
+    font-size: 0.9rem;
+  }
+  
+  .hero-social-list {
+    gap: 12px;
+    margin-top: 15px;
+  }
+  
+  .hero-social-link {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .hero-social-link ion-icon {
+    font-size: 16px;
+  }
+
+}
+
+
 
 
 
@@ -975,6 +1150,41 @@ textarea.input-field {
   .container { max-width: 720px; }
 
   .section-title { max-width: 430px; }
+  
+  /**
+   * HERO - Tablet improvements
+   */
+  
+  .hero {
+    padding-top: 100px;
+    min-height: fit-content;
+  }
+  
+  .hero-banner {
+    max-width: 400px;
+  }
+  
+  .hero-title {
+    font-size: 2.2rem;
+  }
+  
+  .hero-title:last-of-type {
+    font-size: 1.6rem;
+  }
+  
+  .hero-social-list {
+    gap: 18px;
+    margin-top: 25px;
+  }
+  
+  .hero-social-link {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .hero-social-link ion-icon {
+    font-size: 20px;
+  }
 
 
 
@@ -1010,6 +1220,37 @@ textarea.input-field {
   .contact-form {
     max-width: 450px;
     margin-inline: auto;
+  }
+
+  /**
+   * PROJECT OVERLAY - Mobile
+   */
+
+  .project-details {
+    padding: 15px;
+  }
+
+  .project-title {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+  }
+
+  .project-description {
+    font-size: 0.8rem;
+    margin-bottom: 15px;
+  }
+
+  .project-links {
+    gap: 10px;
+  }
+
+  .project-link {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+
+  .project-link ion-icon {
+    font-size: 14px;
   }
 
 }
@@ -1151,6 +1392,8 @@ textarea.input-field {
     position: absolute;
     bottom: 92px;
     left: -30px;
+    margin-top: 0;
+    gap: 0;
   }
 
   .hero-social-list::after {
@@ -1170,6 +1413,11 @@ textarea.input-field {
     padding: 5px;
     font-size: 18px;
     transition: var(--transition-1);
+    background: none;
+    border-radius: 0;
+    width: auto;
+    height: auto;
+    justify-content: flex-start;
   }
 
   .hero-social-link:is(:hover, :focus) { color: var(--color-primary); }
@@ -1226,14 +1474,14 @@ textarea.input-field {
    * ABOUT
    */
 
-  .about {
+  /* .about {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 30px;
-  }
+  } */
 
-  .about-banner { margin-bottom: 0; }
+  /* .about-banner { margin-bottom: 0; } */
 
 
 
@@ -1337,7 +1585,7 @@ textarea.input-field {
    * ABOUT
    */
 
-  .about-banner { max-width: 450px; }
+  /* .about-banner { max-width: 450px; } */
 
 }
 
