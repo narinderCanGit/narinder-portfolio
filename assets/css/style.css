@@ -1698,21 +1698,68 @@ margin-bottom: 50px;
 }
 
 .timeline-container {
-    padding: 8px;
-    padding-left: 60px;
+    padding: 25px;
+    padding-left: 75px;
     position: relative;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-12);
+    box-shadow: var(--shadow-1);
+    border: 1px solid rgba(235, 130, 45, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--raw-seinna), var(--sizzling-sunrise));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.timeline-container:hover::before {
+    opacity: 1;
+}
+
+.timeline-container:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(235, 130, 45, 0.15);
+    border-color: rgba(235, 130, 45, 0.3);
+}
+
+.timeline-box:nth-child(2n) .timeline-container {
+    padding-left: 25px;
+    padding-right: 75px;
 }
 
 .timeline-logo {
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     overflow: hidden;
-    top: 10px;
-    left: 10px;
-    border-radius: 4px;
-    background: var(--bg-secondary);
-    padding: 4px;
+    top: 20px;
+    left: 15px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    padding: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border: 3px solid var(--raw-seinna);
+    transition: all 0.3s ease;
+}
+
+.timeline-box:nth-child(2n) .timeline-logo {
+    right: 15px;
+    left: auto;
+}
+
+.timeline-container:hover .timeline-logo {
+    transform: scale(1.05);
+    border-color: var(--sizzling-sunrise);
+    box-shadow: 0 6px 20px rgba(235, 130, 45, 0.3);
 }
 
 .timeline-logo > img {
@@ -1745,42 +1792,72 @@ margin-bottom: 50px;
 }
 
 .experience-designation {
-    margin: 5px 0 5px;
-    font-weight: 400;
-    font-size: 1rem;
+    margin: 8px 0;
+    font-weight: 600;
+    font-size: 1.1rem;
     color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .experience-company-name {
-    font-size: 1.2rem;
-    color: #eb822d;
+    font-size: 1.4rem;
+    color: var(--raw-seinna);
     line-height: 1.3;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     word-wrap: break-word;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .experience-duration {
-    color: #9e9b9b;
-    font-weight: 100;
-    color: grey;
-    font-size: 1rem;
-    margin-bottom: 5px;
+    color: var(--color-secondary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    background: rgba(235, 130, 45, 0.1);
+    padding: 4px 12px;
+    border-radius: 15px;
+    display: inline-block;
+    border: 1px solid rgba(235, 130, 45, 0.2);
 }
 
 .experience-description {
     font-size: 14px;
-    padding: 2px;
-    color: grey;
-    line-height: 20px;
+    padding: 0;
+    color: var(--color-secondary);
+    line-height: 1.6;
     text-align: left;
+    margin-top: 15px;
 }
 
 .experience-description li {
     text-align: left;
-    margin-bottom: 8px;
-    padding-left: 0;
-    list-style: disc;
-    list-style-position: inside;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    list-style: none;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.experience-description li::before {
+    content: '▶';
+    color: var(--raw-seinna);
+    font-size: 12px;
+    position: absolute;
+    left: -15px;
+    top: 2px;
+    transition: all 0.3s ease;
+}
+
+.experience-description li:hover::before {
+    color: var(--sizzling-sunrise);
+    transform: translateX(3px);
+}
+
+.experience-description li:hover {
+    color: var(--color-primary);
+    transform: translateX(5px);
 }
 
 /* Mobile view: Experience timeline in a single column */
@@ -1799,14 +1876,16 @@ margin-bottom: 50px;
     }
     
     .timeline-container {
-        padding-left: 50px;
+        padding: 20px;
+        padding-left: 60px;
+        padding-right: 20px;
     }
     
     .timeline-logo {
-        width: 35px;
-        height: 35px;
-        top: 8px;
-        left: 8px;
+        width: 40px;
+        height: 40px;
+        top: 15px;
+        left: 10px;
     }
     
     .experience-company-name {

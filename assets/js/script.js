@@ -147,23 +147,38 @@ document.addEventListener("scroll", function () {
   const timelineBoxes = document.querySelectorAll(".timeline-box");
   if (timelineBoxes.length < 2) return;
 
-  const getDotY = (box) => {
+  const getDotCenter = (box) => {
     const rect = box.getBoundingClientRect();
-    return rect.top + rect.height * 0.25 + window.scrollY;
+    const dotTop = rect.top + rect.height * 0.2 + 7.5; // 7.5px is half of 15px dot height
+    return dotTop + window.scrollY;
   };
 
-  const firstDotY = getDotY(timelineBoxes[0]);
-  const lastDotY = getDotY(timelineBoxes[timelineBoxes.length - 1]);
+  const getDotEdge = (box, isFirst = true) => {
+    const rect = box.getBoundingClientRect();
+    // Use the actual dot position from CSS (top: 20% of timeline-box height)
+    const dotTop = rect.top + rect.height * 0.2 + window.scrollY;
+    // For first dot, start from top edge; for last dot, end at bottom edge
+    return isFirst ? dotTop : dotTop + 15; // 15px is the actual dot height from CSS
+  };
+
+  const firstDotCenter = getDotCenter(timelineBoxes[0]);
+  const lastDotCenter = getDotCenter(timelineBoxes[timelineBoxes.length - 1]);
+  const firstDotEdge = getDotEdge(timelineBoxes[0], true);
+  const lastDotEdge = getDotEdge(
+    timelineBoxes[timelineBoxes.length - 1],
+    false
+  );
 
   const sectionRect = experienceSection.getBoundingClientRect();
   const scrollY = window.scrollY + window.innerHeight / 2;
 
-  const minY = firstDotY;
-  const maxY = lastDotY;
+  const minY = firstDotCenter;
+  const maxY = lastDotCenter;
   const progress = Math.min(Math.max((scrollY - minY) / (maxY - minY), 0), 1);
 
-  // Offset by half the traveller's height for perfect alignment
-  const moveY = (maxY - minY) * progress;
+  // Calculate movement range based on actual divider height (edge to edge)
+  const moveRange = lastDotEdge - firstDotEdge;
+  const moveY = moveRange * progress;
 
   traveller.style.transform = `translateY(${moveY}px)`;
 });
@@ -184,20 +199,52 @@ function setTimelineDividerHeight() {
   const parentRect = parent.getBoundingClientRect();
   const parentTop = parentRect.top + window.scrollY;
 
-  // Get the top position of the first and last dot (using 25% offset as in your CSS)
-  const getDotY = (box) => {
+  // Get the edge position of the first and last timeline dots (not center)
+  const getDotEdge = (box, isFirst = true) => {
     const rect = box.getBoundingClientRect();
-    return rect.top + rect.height * 0.25 + window.scrollY;
+    // Use the actual dot position from CSS (top: 20% of timeline-box height)
+    const dotTop = rect.top + rect.height * 0.2 + window.scrollY;
+    // For first dot, start from top edge; for last dot, end at bottom edge
+    return isFirst ? dotTop : dotTop + 15; // 15px is the actual dot height from CSS
   };
 
-  const firstDotY = getDotY(timelineBoxes[0]);
-  const lastDotY = getDotY(timelineBoxes[timelineBoxes.length - 1]);
+  const firstDotEdge = getDotEdge(timelineBoxes[0], true);
+  const lastDotEdge = getDotEdge(
+    timelineBoxes[timelineBoxes.length - 1],
+    false
+  );
 
-  // Set divider top and height relative to its parent
-  divider.style.top = `${firstDotY - parentTop}px`;
-  divider.style.height = `${lastDotY - firstDotY}px`;
+  console.log("Timeline calculation:", {
+    firstDotEdge,
+    lastDotEdge,
+    parentTop,
+    totalHeight: lastDotEdge - firstDotEdge,
+    boxCount: timelineBoxes.length,
+  });
+
+  // Set divider position and height to span from first dot top to last dot bottom
+  const topOffset = firstDotEdge - parentTop;
+  const height = Math.max(lastDotEdge - firstDotEdge, 50); // Minimum height of 50px
+
+  divider.style.top = `${topOffset}px`;
+  divider.style.height = `${height}px`;
 }
 
 // Run on DOMContentLoaded and on window resize
-window.addEventListener("DOMContentLoaded", setTimelineDividerHeight);
-window.addEventListener("resize", setTimelineDividerHeight);
+window.addEventListener("DOMContentLoaded", () => {
+  // Add multiple delays to handle different loading scenarios
+  setTimeout(setTimelineDividerHeight, 100);
+  setTimeout(setTimelineDividerHeight, 300);
+  setTimeout(setTimelineDividerHeight, 500);
+});
+window.addEventListener("resize", () => {
+  // Debounce resize events
+  clearTimeout(window.resizeTimeout);
+  window.resizeTimeout = setTimeout(setTimelineDividerHeight, 250);
+});
+window.addEventListener("load", setTimelineDividerHeight); // Also run on full page load
+
+// Additional trigger for font loading
+if (document.fonts) {
+  document.fonts.ready.then(setTimelineDividerHeight);
+}
